@@ -28,10 +28,10 @@ namespace AimAssistGola
 
         // AIM bot Stuff
         static int current_Tick;
-        static float sensitivity;
-        static float flsensitivity;
-        static int BoneIndex = 8;
-        static int Smooth = 5;
+        static float sensitivity=1;
+        static float flsensitivity=1;
+        static int BoneIndex = 6;
+        static int Smooth = 0;
         private static int current_tick, previous_tick;
 
         // TriggerBot
@@ -65,7 +65,7 @@ namespace AimAssistGola
 
                     if (target.IsDormant != true &&
                         target.Health > 0
-                        //&& MyTeamId != target.TeamId    // not in my team
+                       //&& MyTeamId != target.TeamId    // not in my team
                        && target.TeamId != 1           // not a Spectator
                     )
                     {
@@ -78,31 +78,17 @@ namespace AimAssistGola
 
         static void Aim()
         {
-            float[] viewAngle = getViewAngle();
-            //current_tick = self.TickCount;
+            float[] viewAngle = self.ViewAngle;
+            current_tick = self.TickCount;
             //flsensitivity = self.isScoped ?
             //    (self.FOV / 90.0f) * getSensitivity() :
             //    getSensitivity();
-
+            flsensitivity = 1;
             target.BoneIndex = BoneIndex;
             float[] playerHeadPosition = target.PlayerBonePosition;
 
-            aimAtTarget(viewAngle, getTargetAngle(self, target, BoneIndex), 0.0111111111111111f, Smooth);
+            aimAtTarget(viewAngle, getTargetAngle(self, target), 0.0111111111111111f, Smooth);
 
-        }
-
-        private static float[] getViewAngle()
-        {
-            ProcessMemory viewAngle = Engine.AtOffset(Offsets.signatures.dwClientState + Offsets.signatures.dwClientState_ViewAngles);
-            return new float[]
-                {
-                    //self.PlayerMemory.AtOffset(Offsets.Variables.m_angEyeAnglesX).AsFloat(),
-                    //self.PlayerMemory.AtOffset(Offsets.Variables.m_angEyeAnglesY).AsFloat(),
-                    //0
-                    viewAngle.AsFloat(),
-                    viewAngle.AtOffset(sizeof(float)).AsFloat(),
-                    viewAngle.AtOffset(2*sizeof(float)).AsFloat()
-                };
         }
 
         private static float getSensitivity()
@@ -110,13 +96,13 @@ namespace AimAssistGola
             return Engine.AtAddress(Engine + Offsets.signatures.dwSensitivity).AsFloat();
         }
 
-        static float[] getTargetAngle(Player self, Player target, int index)
+        static float[] getTargetAngle(Player self, Player target)
         {
-            target.BoneIndex = 8;
+            target.BoneIndex = BoneIndex;
             float[] m = target.PlayerBonePosition;
             float[] c, p;
 
-            c = self.VecOrigin;
+            c = self.Position_VecOrigin;
             p = self.VecView;
             c[0] += p[0]; c[1] += p[1]; c[2] += p[2];
             m[0] -= c[0]; m[1] -= c[1]; m[2] -= c[2];
@@ -170,7 +156,7 @@ namespace AimAssistGola
                     yaw += 360f;
                 }
                 tmp = (float)Math.Sqrt(forward[0] * forward[0] + forward[1] * forward[1]);
-                pitch = (float)(Math.Atan2(-forward[2], tmp) * 180 / 3.14159265358979323846f);
+                pitch = (float)(Math.Atan2(-forward[2], tmp) * 180 /Math.PI);
                 if (pitch < 0)
                 {
                     pitch += 360f;
@@ -187,7 +173,7 @@ namespace AimAssistGola
             angle[0] *= radius; angle[1] *= radius; angle[2] *= radius;
         }
 
-        static void aimAtTarget(float[] vangle, float[] angle, float fov, float smooth)
+        static void aimAtTarget2(float[] vangle, float[] angle, float fov, float smooth)
         {
             float x, y, sx, sy;
 
@@ -196,9 +182,9 @@ namespace AimAssistGola
             if (y > 89.0f) y = 89.0f; else if (y < -89.0f) y = -89.0f;
             if (x > 180.0f) x -= 360.0f; else if (x < -180.0f) x += 360.0f;
 
-            //if (fabs(x) / 180.0f >= fov)
+            //if (Math.Abs(x) / 180.0f >= fov)
             //    return;
-            //if (fabs(y) / 89.0f >= fov)
+            //if (Math.Abs(y) / 89.0f >= fov)
             //    return;
             x = ((x / flsensitivity) / 0.022f);
             y = ((y / flsensitivity) / -0.022f);
@@ -234,7 +220,13 @@ namespace AimAssistGola
                 //SetCursorPos((int)sx, (int)sy);
             }
         }
-
+        static void aimAtTarget(float[] vangle, float[] angle, float fov, float smooth)
+        {
+            //self.ViewAngle = angle;
+            int x= 1000;
+            int y= 400;
+            mouse_event(0x01, x, y, 0, 0);
+        }
         //public Player GetClosestEnemyToCrossHair()
         //{
         //    Player enemyPlayer = null;
@@ -257,11 +249,12 @@ namespace AimAssistGola
         public const int MOUSEEVENTF_LEFTUP = 0x04;
 
         //This simulates a left mouse click
-        public static void LeftMouseClick(int xpos, int ypos)
+        public static bool LeftMouseClick(int xpos, int ypos)
         {
-            SetCursorPos(xpos, ypos);
+            bool result =SetCursorPos(xpos, ypos);
             mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
+            return result;
         }
     }
 }

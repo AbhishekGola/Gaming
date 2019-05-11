@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{27E4451D-4F99-45BA-BDC0-2E1D0017491B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameSupport</RootNamespace>
+    <AssemblyName>GameSupport</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GameSupport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameSupport.Designer.cs">
+      <DependentUpon>GameSupport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameSupport.resx">
+      <DependentUpon>GameSupport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AimAssist\AimAssist.csproj">
+      <Project>{cd2d591d-623b-4f44-812e-c4f58475a92a}</Project>
+      <Name>AimAssist</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BunnyHop\BunnyHop.csproj">
+      <Project>{7d26d358-32f0-4f9c-9731-02c7de55531f}</Project>
+      <Name>BunnyHop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Flashhack\FlashHack.csproj">
+      <Project>{79f6ac77-0e96-4125-8453-2352439c173d}</Project>
+      <Name>FlashHack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GlowHack\GlowHack.csproj">
+      <Project>{ed889e76-4512-4878-b28d-8cc16f85e227}</Project>
+      <Name>GlowHack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GolaPresents\GolaPresents.csproj">
+      <Project>{5fcc9613-72f0-4745-9edd-d47f13dbede8}</Project>
+      <Name>GolaPresents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Offsets\Offsets.csproj">
+      <Project>{aaf40aa9-a945-4e55-8e7c-d81ad119a54a}</Project>
+      <Name>Offsets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProcessMemory\MemoryProcessing.csproj">
+      <Project>{33ffea9a-a4d3-4295-8e57-7377388a83ad}</Project>
+      <Name>MemoryProcessing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RadarHack\RadarHack.csproj">
+      <Project>{f5060106-f287-4774-9bba-66e1da32916c}</Project>
+      <Name>RadarHack</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Stealth\Stealth.csproj">
+      <Project>{e571ca2f-1bab-49ac-8a28-e686b34c953e}</Project>
+      <Name>Stealth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TriggerBot\TriggerBot.csproj">
+      <Project>{c4b8ffe0-3633-4e6d-8f93-e9fdc6d42c8f}</Project>
+      <Name>TriggerBot</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

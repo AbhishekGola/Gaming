@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/Hacks/CSGO/GolaHack/GolaPresents/**/*/bin
+/Hacks/CSGO/GolaHack/GolaPresents/**/*/obj
+**/*/Packages
+
+/Hacks/CSGO/GolaHack/GolaPresents/.vs/GolaPresents/v16

@@ -17,10 +17,10 @@ namespace AimAssist
         static ProcessMemory Client;
         static Int32 dwLocalPlayer = Offsets.signatures.dwLocalPlayer;
 
-        private static int BoneIndex = 8;
-        private static float Smooth = 8f;
+        private static int BoneIndex = 6;
+        private static float Smooth = 5f;
 
-        public static void Main2()
+        public static void Main()
         {
             if (!engine.initialize())
             {
@@ -28,9 +28,9 @@ namespace AimAssist
             }
 
             Stealth.Stealth.Hide("CSAA");
-
             sensitivity = Convar.find(crc32.initialize(-889421740, 11, 1387158398));
             mp_teammates_are_enemies = Convar.find(crc32.initialize(1235347760, 24, 304350720));
+            float sense = sensitivity.getFloat();
 
             while (engine.isRunning())
             {
@@ -55,7 +55,7 @@ namespace AimAssist
             if (InputSystem.isButtonDown(107) == 1 || InputSystem.isButtonDown(111) == 1)
             {
                 //localPlayer = new Models.Player(Client.AtAddress(Client + dwLocalPlayer));
-                if (!getTarget(self, vangle) && !target.isValid() 
+                if (!getTarget(self, vangle) && !target.isValid()
                     //&& localPlayer.PlayeyInCrossHairId > 0 && localPlayer.PlayeyInCrossHairId < 65
                     )
                     return;
@@ -80,10 +80,10 @@ namespace AimAssist
             if (y > 89.0f) y = 89.0f; else if (y < -89.0f) y = -89.0f;
             if (x > 180.0f) x -= 360.0f; else if (x < -180.0f) x += 360.0f;
 
-            //if (fabs(x) / 180.0f >= fov)
-            //    return;
-            //if (fabs(y) / 89.0f >= fov)
-            //    return;
+            if (fabs(x) / 180.0f >= fov)
+                return;
+            if (fabs(y) / 89.0f >= fov)
+                return;
             x = ((x / flsensitivity) / 0.022f);
             y = ((y / flsensitivity) / -0.022f);
             if (smooth != 0)
@@ -145,8 +145,8 @@ namespace AimAssist
 
         static void sincos(float radians, ref float sine, ref float cosine)
         {
-            sine = (float)sin(radians);
-            cosine = (float)cos(radians);
+            sine = (float)Math.Sin(radians);
+            cosine = (float)Math.Cos(radians);
         }
 
         static void angleVector(float[] angle, ref float[] forward)
@@ -180,28 +180,35 @@ namespace AimAssist
 
         private static void angleNormalize(ref float[] angle)
         {
-            float radius = 1f / (float)(sqrt(angle[0] * angle[0] + angle[1] * angle[1] + angle[2] * angle[2]) + 1.192092896e-07f);
+            float radius = 1f / (float)(Math.Sqrt(angle[0] * angle[0] + angle[1] * angle[1] + angle[2] * angle[2]) + 1.192092896e-07f);
             angle[0] *= radius; angle[1] *= radius; angle[2] *= radius;
         }
 
         static float[] getTargetAngle(Player self, Player target, int index)
         {
-            float[] m = target.getBonePos(index);
-            float[] c, p;
+            float[] targetBonePosition = target.getBonePos(index);
+            float[] selfVecOrigin, selfVecView;
 
-            c = self.getVecOrigin();
-            p = self.getVecView();
-            c[0] += p[0]; c[1] += p[1]; c[2] += p[2];
-            m[0] -= c[0]; m[1] -= c[1]; m[2] -= c[2];
-            angleNormalize(ref m);
-            vectorAngles(m, ref m);
+            selfVecOrigin = self.getVecOrigin();
+            selfVecView = self.getVecView();
+            selfVecOrigin[0] += selfVecView[0];
+            selfVecOrigin[1] += selfVecView[1];
+            selfVecOrigin[2] += selfVecView[2];
+
+            targetBonePosition[0] -= selfVecOrigin[0];
+            targetBonePosition[1] -= selfVecOrigin[1];
+            targetBonePosition[2] -= selfVecOrigin[2];
+            angleNormalize(ref targetBonePosition);
+            vectorAngles(targetBonePosition, ref targetBonePosition);
             if (self.getShotsFired() > 1)
             {
-                p = self.getVecPunch();
-                m[0] -= p[0] * 2f; m[1] -= p[1] * 2f; m[2] -= p[2] * 2f;
+                float[] selfVecPunch = self.getVecPunch();
+                targetBonePosition[0] -= selfVecPunch[0] * 2f;
+                targetBonePosition[1] -= selfVecPunch[1] * 2f;
+                targetBonePosition[2] -= selfVecPunch[2] * 2f;
             }
-            vectorClamp(ref m);
-            return m;
+            vectorClamp(ref targetBonePosition);
+            return targetBonePosition;
         }
 
         static void vectorClamp(ref float[] v)
@@ -237,34 +244,27 @@ namespace AimAssist
             }
             else
             {
-                yaw = (float)(atan2(forward[1], forward[0]) * 180f / 3.14159265358979323846f);
+                yaw = (float)(Math.Atan2(forward[1], forward[0]) * 180f / Math.PI);
                 if (yaw < 0)
                 {
                     yaw += 360f;
                 }
-                tmp = (float)sqrt(forward[0] * forward[0] + forward[1] * forward[1]);
-                pitch = (float)(atan2(-forward[2], tmp) * 180 / 3.14159265358979323846f);
+                tmp = (float)Math.Sqrt(forward[0] * forward[0] + forward[1] * forward[1]);
+                pitch = (float)(Math.Atan2(-forward[2], tmp) * 180 / Math.PI);
                 if (pitch < 0)
                 {
                     pitch += 360f;
                 }
             }
+
             angles[0] = pitch;
             angles[1] = yaw;
             angles[2] = 0f;
         }
 
-        [DllImport("ntdll")]
-        public static extern double atan2(double x, double y);
-        [DllImport("ntdll")]
-        public static extern double sqrt(double p0);
-        [DllImport("ntdll")]
-        public static extern double fabs(double p0);
-        [DllImport("ntdll")]
-        public static extern double sin(double p0);
-        [DllImport("ntdll")]
-        public static extern double cos(double p0);
         [DllImport("user32")]
         public static extern int mouse_event(int p0, int p1, int p2, int p3, long p4);
+        [DllImport("ntdll")]
+        public static extern double fabs(double p0);
     }
 }

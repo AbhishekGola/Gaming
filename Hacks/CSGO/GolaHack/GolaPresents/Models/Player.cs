@@ -23,6 +23,8 @@ namespace Models
         public const Int32 dwClientState = 0x58BCFC;
 
         private ProcessMemory playerMemory;
+        private ProcessMemory Engine;
+        private ProcessMemory Client;
 
         public Player(ProcessMemory playerMemory)
         {
@@ -104,6 +106,15 @@ namespace Models
             }
         }
 
+        public Team Team
+        {
+            get
+            {
+                Team result = Team.GoTV;
+                Team.TryParse(TeamId.ToString(), out result);
+                return result;
+            }
+        }
         public bool IsDormant
         {
             get
@@ -115,6 +126,20 @@ namespace Models
                 playerMemory.AtOffset(Offsets.Variables.m_iHealth).Set(value);
             }
         }
+
+        public int LifeState
+        {
+            get
+            {
+                return playerMemory.AtOffset(Offsets.Variables.m_lifeState).AsInteger();
+            }
+        }
+
+        public bool isValid()
+        {
+            return (!IsDormant && Health > 0);
+        }
+
         //public int XAngle
 
         public float[] Position_VecOrigin
@@ -220,6 +245,14 @@ namespace Models
             get
             {
                 return playerMemory.AtOffset(Offsets.Variables.m_iGlowIndex).AsInteger();
+            }
+        }
+
+        public int ShotsFiredCount
+        {
+            get
+            {
+                return playerMemory.AtOffset(Offsets.Variables.m_iShotsFired).AsInteger();
             }
         }
     }

@@ -4,7 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
-
+using System.Windows.Forms;
 
 namespace AimAssistGola
 {
@@ -16,7 +16,6 @@ namespace AimAssistGola
         static ProcessMemory processMem;
         static Player self;
         static Player target;
-        static Process process;
 
         static Int32 m_iTeamNum = Offsets.Variables.m_iTeamNum;
         static Int32 dwLocalPlayer = Offsets.signatures.dwLocalPlayer;
@@ -28,8 +27,8 @@ namespace AimAssistGola
 
         // AIM bot Stuff
         static int current_Tick;
-        static float sensitivity=1;
-        static float flsensitivity=1;
+        static float sensitivity = 1;
+        static float flsensitivity = 1;
         static int BoneIndex = 6;
         static int Smooth = 0;
         private static int current_tick, previous_tick;
@@ -37,7 +36,7 @@ namespace AimAssistGola
         // TriggerBot
         static bool AimAssistActive = true;
 
-        static void Main(string[] args)
+        static void Main2(string[] args)
         {
             System.Diagnostics.Process process = System.Diagnostics.Process.GetProcessesByName("csgo")[0];
             processMem = ProcessMemory.ForProcess(process);
@@ -46,7 +45,6 @@ namespace AimAssistGola
             {
                 Stealth.Stealth.Hide("CSAA");
             }
-
             Client = processMem.GetModule("client_panorama.dll");
             Engine = processMem.GetModule("Engine.dll");
 
@@ -55,125 +53,57 @@ namespace AimAssistGola
                 self = new Player(Client.AtAddress(Client + dwLocalPlayer));
 
                 int MyTeamId = self.TeamId;
-                //m_viewPunchAngle
-                int playerInCross = self.PlayeyInCrossHairId;
-                if (AimAssistActive &&
-                    playerInCross > 0 && playerInCross < 65)
-                {
-                    int index = playerInCross - 1;
-                    target = new Player(Client.AtAddress(Client + Offsets.signatures.dwEntityList + index * 0x10));
-
-                    if (target.IsDormant != true &&
-                        target.Health > 0
-                       //&& MyTeamId != target.TeamId    // not in my team
-                       && target.TeamId != 1           // not a Spectator
+                //int playerInCross = self.PlayeyInCrossHairId;
+                if (AimAssistActive
+                    //&& playerInCross > 0 && playerInCross < 65
                     )
-                    {
-                        Aim();
-                    }
+                {
+                    //int index = playerInCross - 1;
+                    //target = new Player(Client.AtAddress(Client + Offsets.signatures.dwEntityList + index * 0x10));
+
+                    //if (target.IsDormant != true 
+                    //    && target.Health > 0 
+                    //    && MyTeamId != target.TeamId    // not in my team
+                    //    && target.TeamId != 1           // not a Spectator
+                    //    )
+                    //{
+                    aim();
+                    //}
                 }
                 Thread.Sleep(10);
             }
         }
 
-        static void Aim()
+        static void aim()
         {
-            float[] viewAngle = self.ViewAngle;
+            float[] vangle;
+            int FOV = self.FOV;
+            vangle = self.ViewAngle;
+            Int32 dwSensitivity = Offsets.signatures.dwSensitivity;
+            Int32 dwSensitivityPtr = Offsets.signatures.dwSensitivityPtr;
+            ProcessMemory sensitivityPtr = Client.AtOffset(Offsets.signatures.dwSensitivityPtr);
+            sensitivity = Client.AtOffset(Offsets.signatures.dwSensitivity).AsFloat();
+            sensitivity = 3;
             current_tick = self.TickCount;
-            //flsensitivity = self.isScoped ?
-            //    (self.FOV / 90.0f) * getSensitivity() :
-            //    getSensitivity();
-            flsensitivity = 1;
-            target.BoneIndex = BoneIndex;
-            float[] playerHeadPosition = target.PlayerBonePosition;
-
-            aimAtTarget(viewAngle, getTargetAngle(self, target), 0.0111111111111111f, Smooth);
-
-        }
-
-        private static float getSensitivity()
-        {
-            return Engine.AtAddress(Engine + Offsets.signatures.dwSensitivity).AsFloat();
-        }
-
-        static float[] getTargetAngle(Player self, Player target)
-        {
-            target.BoneIndex = BoneIndex;
-            float[] m = target.PlayerBonePosition;
-            float[] c, p;
-
-            c = self.Position_VecOrigin;
-            p = self.VecView;
-            c[0] += p[0]; c[1] += p[1]; c[2] += p[2];
-            m[0] -= c[0]; m[1] -= c[1]; m[2] -= c[2];
-            angleNormalize(ref m);
-            vectorAngles(m, ref m);
-            if (self.CountShotsFired > 1)
+            flsensitivity = self.isScoped ?
+                (FOV / 90.0f) * sensitivity :
+                sensitivity;
+            if (GetAsyncKeyState(Keys.LShiftKey) != 0)
             {
-                p = self.VecPunch;
-                m[0] -= p[0] * 2f; m[1] -= p[1] * 2f; m[2] -= p[2] * 2f;
-            }
-            vectorClamp(ref m);
-            return m;
-        }
+                // Move code inside for buttom click check.
 
-        static void vectorClamp(ref float[] v)
-        {
-            if (v[0] > 89.0f && v[0] <= 180.0f)
-                v[0] = 89.0f;
-            else if (v[0] > 180.0f)
-                v[0] = v[0] - 360.0f;
-            else if (v[0] < -89.0f)
-                v[0] = -89.0f;
-            if (v[1] > 180.0f)
-                v[1] -= 360.0f;
-            else if (v[1] < -180.0f)
-                v[1] += 360.0f;
-            v[2] = 0;
-        }
-
-        static void vectorAngles(float[] forward, ref float[] angles)
-        {
-            float tmp, yaw, pitch;
-
-            if (forward[1] == 0f && forward[0] == 0f)
-            {
-                yaw = 0;
-                if (forward[2] > 0f)
+                if (getTarget(self, vangle) && target.isValid())
                 {
-                    pitch = 270f;
+                    aimAtTarget(vangle, getTargetAngle(self, target, BoneIndex), FOV, Smooth);
                 }
                 else
                 {
-                    pitch = 90f;
+                    Thread.Sleep(1000);
                 }
             }
-            else
-            {
-                yaw = (float)(Math.Atan2(forward[1], forward[0]) * 180f / 3.14159265358979323846f);
-                if (yaw < 0)
-                {
-                    yaw += 360f;
-                }
-                tmp = (float)Math.Sqrt(forward[0] * forward[0] + forward[1] * forward[1]);
-                pitch = (float)(Math.Atan2(-forward[2], tmp) * 180 /Math.PI);
-                if (pitch < 0)
-                {
-                    pitch += 360f;
-                }
-            }
-            angles[0] = pitch;
-            angles[1] = yaw;
-            angles[2] = 0f;
         }
 
-        private static void angleNormalize(ref float[] angle)
-        {
-            float radius = 1f / (float)(Math.Sqrt(angle[0] * angle[0] + angle[1] * angle[1] + angle[2] * angle[2]) + 1.192092896e-07f);
-            angle[0] *= radius; angle[1] *= radius; angle[2] *= radius;
-        }
-
-        static void aimAtTarget2(float[] vangle, float[] angle, float fov, float smooth)
+        static void aimAtTarget(float[] vangle, float[] angle, float fov, float smooth)
         {
             float x, y, sx, sy;
 
@@ -217,16 +147,163 @@ namespace AimAssistGola
             {
                 previous_tick = current_tick;
                 mouse_event(0x0001, (int)sx, (int)sy, 0, 0);
-                //SetCursorPos((int)sx, (int)sy);
             }
         }
-        static void aimAtTarget(float[] vangle, float[] angle, float fov, float smooth)
+
+        static bool getTarget(Player self, float[] vangle)
         {
-            //self.ViewAngle = angle;
-            int x= 1000;
-            int y= 400;
-            mouse_event(0x01, x, y, 0, 0);
+            float best_fov;
+            int i;
+            Player e;
+            float fov;
+            int maxClients = Engine.AtAddress(Engine.Address + Offsets.signatures.dwClientState + Offsets.signatures.dwClientState_MaxPlayer).AsInteger();
+            if (maxClients == 0)
+            {
+                maxClients = Engine.AtOffset(Offsets.signatures.dwClientState + Offsets.signatures.dwClientState_MaxPlayer).AsInteger();
+            }
+            if (maxClients == 0)
+            {
+                maxClients = 65;
+            }
+
+            best_fov = 9999f;
+            for (i = 1; i < maxClients; i++)
+            {
+                e = new Player(Client.AtAddress(Client + Offsets.signatures.dwEntityList + i * 0x10));
+                if (!e.isValid())
+                    continue;
+                if (self.TeamId == e.TeamId)
+                    continue;
+                fov = (float)angleBetween(vangle, getTargetAngle(self, e, BoneIndex));
+                if (fov < best_fov)
+                {
+                    best_fov = fov;
+                    target = e;
+                }
+            }
+            return best_fov != 9999.0f;
         }
+
+        static void sincos(float radians, ref float sine, ref float cosine)
+        {
+            sine = (float)Math.Sin(radians);
+            cosine = (float)Math.Cos(radians);
+        }
+
+        static void angleVector(float[] angle, ref float[] forward)
+        {
+            float sp = 0, sy = 0, cp = 0, cy = 0;
+
+            sincos((float)(angle[0]) * (float)(Math.PI / 180f), ref sp, ref cp);
+            sincos((float)(angle[1]) * (float)(Math.PI / 180f), ref sy, ref cy);
+            forward[0] = cp * cy;
+            forward[1] = cp * sy;
+            forward[2] = -sp;
+        }
+
+        static double dot(float[] v0, float[] v1)
+        {
+            return (v0[0] * v1[0] + v0[1] * v1[1] + v0[2] * v1[2]);
+        }
+
+        static float length(float[] v0)
+        {
+            return (v0[0] * v0[0] + v0[1] * v0[1] + v0[2] * v0[2]);
+        }
+
+        private static double angleBetween(float[] p0, float[] p1)
+        {
+            float[] a0 = new float[3], a1 = new float[3];
+            angleVector(p0, ref a0);
+            angleVector(p1, ref a1);
+            return Math.Acos(dot(a0, a1) / length(a0)) * (float)(180f / Math.PI);
+        }
+
+        private static void angleNormalize(ref float[] angle)
+        {
+            float radius = 1f / (float)(Math.Sqrt(angle[0] * angle[0] + angle[1] * angle[1] + angle[2] * angle[2]) + 1.192092896e-07f);
+            angle[0] *= radius; angle[1] *= radius; angle[2] *= radius;
+        }
+
+        static float[] getTargetAngle(Player self, Player target, int index)
+        {
+            target.BoneIndex = 6;
+            float[] targetBonePosition = target.PlayerBonePosition;
+            float[] selfVecOrigin, selfVecView;
+
+            selfVecOrigin = self.Position_VecOrigin;
+            selfVecView = self.VecView;
+            selfVecOrigin[0] += selfVecView[0];
+            selfVecOrigin[1] += selfVecView[1];
+            selfVecOrigin[2] += selfVecView[2];
+
+            targetBonePosition[0] -= selfVecOrigin[0];
+            targetBonePosition[1] -= selfVecOrigin[1];
+            targetBonePosition[2] -= selfVecOrigin[2];
+            angleNormalize(ref targetBonePosition);
+            vectorAngles(targetBonePosition, ref targetBonePosition);
+            if (self.ShotsFiredCount > 1)
+            {
+                float[] selfVecPunch = self.VecPunch;
+                targetBonePosition[0] -= selfVecPunch[0] * 2f;
+                targetBonePosition[1] -= selfVecPunch[1] * 2f;
+                targetBonePosition[2] -= selfVecPunch[2] * 2f;
+            }
+            vectorClamp(ref targetBonePosition);
+            return targetBonePosition;
+        }
+
+        static void vectorClamp(ref float[] v)
+        {
+            if (v[0] > 89.0f && v[0] <= 180.0f)
+                v[0] = 89.0f;
+            else if (v[0] > 180.0f)
+                v[0] = v[0] - 360.0f;
+            else if (v[0] < -89.0f)
+                v[0] = -89.0f;
+            if (v[1] > 180.0f)
+                v[1] -= 360.0f;
+            else if (v[1] < -180.0f)
+                v[1] += 360.0f;
+            v[2] = 0;
+        }
+
+        static void vectorAngles(float[] forward, ref float[] angles)
+        {
+            float tmp, yaw, pitch;
+
+            if (forward[1] == 0f && forward[0] == 0f)
+            {
+                yaw = 0;
+                if (forward[2] > 0f)
+                {
+                    pitch = 270f;
+                }
+                else
+                {
+                    pitch = 90f;
+                }
+            }
+            else
+            {
+                yaw = (float)(Math.Atan2(forward[1], forward[0]) * 180f / Math.PI);
+                if (yaw < 0)
+                {
+                    yaw += 360f;
+                }
+                tmp = (float)Math.Sqrt(forward[0] * forward[0] + forward[1] * forward[1]);
+                pitch = (float)(Math.Atan2(-forward[2], tmp) * 180 / Math.PI);
+                if (pitch < 0)
+                {
+                    pitch += 360f;
+                }
+            }
+
+            angles[0] = pitch;
+            angles[1] = yaw;
+            angles[2] = 0f;
+        }
+
         //public Player GetClosestEnemyToCrossHair()
         //{
         //    Player enemyPlayer = null;
@@ -251,11 +328,17 @@ namespace AimAssistGola
         //This simulates a left mouse click
         public static bool LeftMouseClick(int xpos, int ypos)
         {
-            bool result =SetCursorPos(xpos, ypos);
+            bool result = SetCursorPos(xpos, ypos);
             mouse_event(MOUSEEVENTF_LEFTDOWN, xpos, ypos, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, xpos, ypos, 0, 0);
             return result;
         }
+
+        [DllImport("user32.dll")]
+        public static extern short GetAsyncKeyState(Keys vKeys);
+
+        [DllImport("user32.dll")]
+        public static extern short GetAsyncKeyState(MouseButtons mouseButton);
     }
 }
 

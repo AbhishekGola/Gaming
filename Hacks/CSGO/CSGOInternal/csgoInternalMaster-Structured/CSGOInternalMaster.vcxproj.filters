@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Valve">
+      <UniqueIdentifier>{1c856dee-19d0-4d7f-b9df-cff942d9b73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{c581f573-632b-4c18-9d6d-639779729af3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hacks">
+      <UniqueIdentifier>{4e9534e6-cc2c-4cea-86e9-d15a5f319197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Controls">
+      <UniqueIdentifier>{503613b7-5d55-4cf0-a8b8-bd142b9f4446}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="interfaces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netvar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="offsets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skinparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Valve\KeyValues.cpp">
+      <Filter>Valve</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\aimbot.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\autoaccept.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\autodefuse.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\autowall.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\bunnyhop.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\chams.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\dlights.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\entity.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\esp.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\gameevents.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\glovechanger.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\glow.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\hitmarkers.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\nadehelper.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\nadepred.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\noflash.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\nosmoke.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\overrideview.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\rcs.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\skinchanger.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\SkyChanger.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\speclist.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\stickers.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\thirdperson.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="hacks\triggerbot.cpp">
+      <Filter>Hacks</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\color.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\fonts.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Group.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\GUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\IMenu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\menu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\SpotifyControls.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Tab.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\Button.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\Checkbox.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\ColorPicker.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\ComboBox.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\controls.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\IControl.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\KeyBind.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\SearchBox.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\Slider.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\controls\Toggle.cpp">
+      <Filter>GUI\Controls</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="netvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skinparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CBaseClientState.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CCSGameRules.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CCSWeaponSystem.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CEffects.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CGameServer.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CGameUI.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CGlobalVars.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CGlowObjectManager.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CInput.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\common.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CPlayerResource.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CUtlMemory.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CUtlVector.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\CViewRender.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\definitions.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IAppSystem.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IBaseClientDLL.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IClientEntity.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IClientEntityList.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IClientMode.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ICommandLine.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ICvar.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IEngineClient.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IEngineSound.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IEngineTrace.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IEngineVGui.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IGameEvent.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IGameMovement.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IInputSystem.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ILauncherMgr.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ILocalize.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IMaterial.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IMaterialSystem.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IPhysicsSurfaceProps.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IPrediction.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ISteamHTTP.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\ISurface.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IVDebugOverlay.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IVModelInfo.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IVModelRender.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\IVPanel.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\KeyValues.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\MatSysConfig.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\sdk.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\vector.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="Valve\Vector2D.h">
+      <Filter>Valve</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\aimbot.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\autoaccept.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\autodefuse.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\autowall.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\bunnyhop.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\chams.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\dlights.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\entity.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\esp.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\gameevents.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\glovechanger.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\glow.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\hacks.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\hitmarkers.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\nadehelper.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\nadepred.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\noflash.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\nosmoke.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\overrideview.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\pvsfix.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\rankrevealer.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\rcs.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\skinchanger.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\SkyChanger.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\speclist.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\stickers.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\thirdperson.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\triggerbot.h">
+      <Filter>Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\color.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\fonts.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Group.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\IMenu.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\menu.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\SpotifyControls.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Tab.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\Button.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\Checkbox.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\ColorPicker.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\ComboBox.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\controls.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\IControl.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\KeyBind.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\SearchBox.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\Slider.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\controls\Toggle.h">
+      <Filter>GUI\Controls</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

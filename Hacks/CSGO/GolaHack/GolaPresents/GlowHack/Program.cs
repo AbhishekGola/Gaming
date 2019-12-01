@@ -61,7 +61,9 @@ namespace GlowHack
                     // 1 GoTV; 2 T; 3 CT
                     int EntityBaseTeamID = currentPlayer.TeamId;
 
-                    if (currentPlayerDormant || EntityBaseTeamID == 0 || EntityBaseTeamID == MyTeamId)
+                    if (currentPlayerDormant || EntityBaseTeamID == 0 
+                        //|| EntityBaseTeamID == MyTeamId
+                        )
                     {
                         continue;
                     }

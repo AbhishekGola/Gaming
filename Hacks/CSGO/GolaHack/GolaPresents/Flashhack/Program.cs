@@ -31,7 +31,7 @@ namespace Flashhack
                 int flashDuration = localPlayer.AtOffset(Offsets.Variables.m_flFlashDuration).AsInteger();
                 //int flashduration = proM.
                 float valueCompare = 1081339010;
-                float value = 10000000;
+                float value = 100;
                 if (flashDuration > valueCompare)
                 {
                     localPlayer.AtOffset(Offsets.Variables.m_flFlashDuration).Set(value);                    

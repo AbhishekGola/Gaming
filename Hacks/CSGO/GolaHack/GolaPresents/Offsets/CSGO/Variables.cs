@@ -7,7 +7,7 @@ namespace Offsets
     {
         public const Int32 cs_gamerules_data = 0x0;
         public const Int32 m_ArmorValue = 0xB340;
-        public const Int32 m_Collision = 0x31C;
+        public const Int32 m_Collision = 0x320;
         public const Int32 m_CollisionGroup = 0x474;
         public const Int32 m_Local = 0x2FBC;
         public const Int32 m_MoveType = 0x25C;
@@ -32,11 +32,17 @@ namespace Offsets
         public const Int32 m_bSpotted = 0x93D;
         public const Int32 m_bSpottedByMask = 0x980;
         public const Int32 m_bStartedArming = 0x33D0;
+        public const Int32 m_bUseCustomAutoExposureMax = 0x9D9;
+        public const Int32 m_bUseCustomAutoExposureMin = 0x9D8;
+        public const Int32 m_bUseCustomBloomScale = 0x9DA;
         public const Int32 m_clrRender = 0x70;
         public const Int32 m_dwBoneMatrix = 0x26A8;
         public const Int32 m_fAccuracyPenalty = 0x3310;
         public const Int32 m_fFlags = 0x104;
         public const Int32 m_flC4Blow = 0x2990;
+        public const Int32 m_flCustomAutoExposureMax = 0x9E0;
+        public const Int32 m_flCustomAutoExposureMin = 0x9DC;
+        public const Int32 m_flCustomBloomScale = 0x9E4;
         public const Int32 m_flDefuseCountDown = 0x29AC;
         public const Int32 m_flDefuseLength = 0x29A8;
         public const Int32 m_flFallbackWear = 0x31C0;

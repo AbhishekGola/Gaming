@@ -96,10 +96,6 @@
       <Project>{ed889e76-4512-4878-b28d-8cc16f85e227}</Project>
       <Name>GlowHack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GolaPresents\GolaPresents.csproj">
-      <Project>{5fcc9613-72f0-4745-9edd-d47f13dbede8}</Project>
-      <Name>GolaPresents</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Offsets\Offsets.csproj">
       <Project>{aaf40aa9-a945-4e55-8e7c-d81ad119a54a}</Project>
       <Name>Offsets</Name>
